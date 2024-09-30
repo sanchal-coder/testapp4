@@ -1,0 +1,48 @@
+<div class="max-w-md mx-auto mt-10">
+  <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="px-6 py-4">
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Patient Form</h2>
+      
+      <%= form_with(model: patient, class: "space-y-6") do |form| %>
+        <% if patient.errors.any? %>
+          <div class="rounded-md bg-red-50 p-4 mb-4">
+            <h3 class="text-red-800 font-semibold"><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h3>
+            <ul class="mt-2 text-red-700">
+              <% patient.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="space-y-2">
+          <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+        </div>
+
+        <div class="space-y-2">
+          <%= form.label :age, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.number_field :age, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+        </div>
+
+        <div class="space-y-2">
+          <%= form.label :contact_info, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :contact_info, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+        </div>
+
+        <div class="space-y-2">
+          <%= form.label :address, class: "block text-sm font-medium text-gray-700" %>
+          <%= form.text_field :address, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+        </div>
+
+        <div>
+         <%= form.submit "Save Patient", class: "w-full inline-flex justify-center rounded-md bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+        <div class="p-4">
+        <button class="flex items-center gap-2 rounded-md bg-black px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-gray-700"> <%= link_to "Back", patients_path %> </button>
+         
+        </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

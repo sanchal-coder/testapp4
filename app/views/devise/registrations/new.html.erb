@@ -1,0 +1,64 @@
+<h2 class="text-2xl font-bold text-center mb-6">Sign Up</h2>
+
+<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :post, id: 'signup-form' }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <!-- Email Field -->
+    <div class="mb-4">
+      <%= f.label :email, class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Password Field -->
+    <div class="mb-4">
+      <%= f.label :password, class: "block text-gray-700 font-semibold mb-2" %>
+      <% if @minimum_password_length %>
+        <em class="text-sm text-gray-500">(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", id: 'password', class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+
+    <!-- Password Confirmation Field -->
+    <div class="mb-4">
+      <%= f.label :password_confirmation, class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", id: 'password_confirmation', class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      <div id="password-error" class="text-red-500 mt-1 text-sm hidden">Passwords do not match.</div>
+    </div>
+
+    <!-- Role Selection Field -->
+    <div class="mb-4">
+      <%= f.label :role, class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.select :role, [['Doctor', 'doctor'], ['Receptionist', 'receptionist']], {}, { required: true, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" } %>
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+      <%= f.submit "Sign up", id: 'submit-button', class: "w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors" %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordField = document.getElementById('password');
+        const passwordConfirmationField = document.getElementById('password_confirmation');
+        const submitButton = document.getElementById('submit-button');
+        const passwordError = document.getElementById('password-error');
+
+        function validatePasswords() {
+            if (passwordField.value !== passwordConfirmationField.value) {
+                passwordError.style.display = 'block'; // Show the error message
+                submitButton.disabled = true;          // Disable the submit button
+            } else {
+                passwordError.style.display = 'none';  // Hide the error message
+                submitButton.disabled = false;         // Enable the submit button
+            }
+        }
+
+        passwordField.addEventListener('input', validatePasswords);
+        passwordConfirmationField.addEventListener('input', validatePasswords);
+    });
+</script>
