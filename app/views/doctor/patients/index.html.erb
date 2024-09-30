@@ -3,43 +3,43 @@
 <div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8 ">
   <div class="flex items-center justify-between pb-6">
         <div>
-            <h2 class="font-semibold text-gray-700">Registered Patients</h2>
+            <h2 class="font-semibold text-gray-700 text-2xl">Registered Patients</h2>
              <span class="text-xs text-gray-500">View details of registered patients</span>
         </div>
-            <p style="color: green"><%= notice %></p>
+            <p class="text-green-600"><%= notice %></p>
   </div>
-  <div class="overflow-y-hidden rounded-lg border">
+  <div class="overflow-y-hidden rounded-lg border shadow-md">
     <div class="overflow-x-auto">
-      <table class="w-full">
+      <table class="min-w-full table-auto"> <!-- Changed to table-auto for better responsiveness -->
         <thead>
           <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-            <th class="px-5 py-3">ID</th>
-            <th class="px-5 py-3">Name</th>
-            <th class="px-5 py-3">Age</th>
-            <th class="px-5 py-3">Contact Info</th>
-            <th class="px-5 py-3">Address</th>
-            <th class="px-5 py-3">Date</th>
+            <th class="px-4 py-3">ID</th> <!-- Adjusted padding for smaller screens -->
+            <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Age</th>
+            <th class="px-4 py-3">Contact Info</th>
+            <th class="px-4 py-3">Address</th>
+            <th class="px-4 py-3">Date</th>
           </tr>
         </thead>
         <tbody class="text-gray-500">
           <% @patients.each do |patient| %>
-          <tr>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+          <tr class="border-b hover:bg-gray-100">
+            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm"> <!-- Adjusted padding for smaller screens -->
               <p class="whitespace-no-wrap"><%= patient.id %></p>
             </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
               <p class="whitespace-no-wrap"><%= patient.name %></p>
             </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
               <p class="whitespace-no-wrap"><%= patient.age %></p>
             </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
               <p class="whitespace-no-wrap"><%= patient.contact_info %></p>
             </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
               <p class="whitespace-no-wrap"><%= patient.address %></p>
             </td>
-            <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
               <p class="whitespace-no-wrap"><%= patient.created_at.to_date %></p>
             </td>
           </tr>
@@ -54,14 +54,12 @@
 
 </div>
 
-
-
-<div class=" flex flex-col w-[600px] h-[250px] gap-10 p-4">
+<div class="flex flex-col w-full max-w-md h-[300px] gap-4 p-4"> <!-- Adjusted height for better display -->
 <div>
 <h2 class="text-xl font-bold text-center">Patient Registration Graph</h2>
 </div>
-<div>
-<%= line_chart @patients_by_day %>  <!-- This will display a graph of patient registrations -->
+<div class="flex justify-center">
+<%= line_chart @patients_by_day, height: '300px', width: '100%' %>  <!-- Ensured chart is responsive -->
 </div>
 </div>
  </div>

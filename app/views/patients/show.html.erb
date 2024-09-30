@@ -1,11 +1,31 @@
-
-<div class="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
   <div class="p-6">
-    <%= render @patient %>
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Patient Details</h2>
+    
+    <div class="mb-4">
+      <span class="block text-sm font-medium text-gray-700">Name:</span>
+      <p class="text-lg font-light text-gray-900"><%= @patient.name %></p>
+    </div>
+
+    <div class="mb-4">
+      <span class="block text-sm font-medium text-gray-700">Age:</span>
+      <p class="text-lg font-light text-gray-900"><%= @patient.age %></p>
+    </div>
+
+    <div class="mb-4">
+      <span class="block text-sm font-medium text-gray-700">Contact Info:</span>
+      <p class="text-lg font-light text-gray-900"><%= @patient.contact_info %></p>
+    </div>
+
+    <div class="mb-4">
+      <span class="block text-sm font-medium text-gray-700">Address:</span>
+      <p class="text-lg font-light text-gray-900"><%= @patient.address %></p>
+    </div>
   </div>
-  <div class="flex justify-between p-4 bg-gray-100 space-x-4">
-    <%= link_to "Edit ", edit_patient_path(@patient), class: "text-white bg-yellow-600 hover:bg-gray-800 px-4 py-2 rounded" %>
-    <%= link_to "Back ", patients_path, class: "text-white bg-blue-600 text-red-200 hover:bg-blue-800 px-4 py-2 rounded" %>
-    <%= button_to "Delete", @patient, method: :delete, class: "text-white bg-red-600 hover:bg-gray-800 px-4 py-2 rounded" %>
+
+  <div class="flex justify-between p-4 bg-gray-100">
+    <%= link_to "Edit", edit_patient_path(@patient), class: "bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-4 py-2 rounded-md" %>
+    <%= link_to "Back", patients_path, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md" %>
+    <%= button_to "Delete", @patient, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md" %>
   </div>
 </div>
