@@ -1,71 +1,69 @@
-<!-- app/views/doctor/patients/index.html.erb -->
-<div class="flex flex-col items-center justify-center gap-10">
-<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8 ">
+<div class="max-w-[1500px] mx-auto"> 
+<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8 flex-shrink-0 ">
   <div class="flex items-center justify-between pb-6">
-        <div>
-            <h2 class="font-semibold text-gray-700 text-2xl">Registered Patients</h2>
-             <span class="text-xs text-gray-500">View details of registered patients</span>
-        </div>
-            <p class="text-green-600"><%= notice %></p>
+    <div>
+      <h2 class="font-semibold text-gray-700">Patients</h2>
+      <span class="text-xs text-gray-500">View details of registered patients</span>
+    </div>
+    <p style="color: green"><%= notice %></p>
+    <div class="flex items-center justify-between">
+      <div class="ml-10 space-x-8 lg:ml-40">
+        <%= link_to "New Patient", new_patient_path, class: "flex items-center gap-2 rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring hover:bg-blue-700"  %>
+      </div>
+    </div>
   </div>
-  <div class="overflow-y-hidden rounded-lg border shadow-md">
-    <div class="overflow-x-auto">
-      <table class="min-w-full table-auto"> <!-- Changed to table-auto for better responsiveness -->
+  <div class=" rounded-lg border">
+    <div class="overflow-x-auto flex-shrink-0">
+      <table class="w-full">
         <thead>
           <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-            <th class="px-4 py-3">ID</th> <!-- Adjusted padding for smaller screens -->
-            <th class="px-4 py-3">Name</th>
-            <th class="px-4 py-3">Age</th>
-            <th class="px-4 py-3">Contact Info</th>
-            <th class="px-4 py-3">Address</th>
-            <th class="px-4 py-3">Date</th>
+            <th class="px-5 py-3">ID</th>
+            <th class="px-5 py-3">Name</th>
+            <th class="px-5 py-3">Age</th>
+            <th class="px-5 py-3">Contact Info</th>
+            <th class="px-5 py-3">Address</th>
+            <th class="px-5 py-3">Date</th>
           </tr>
         </thead>
         <tbody class="text-gray-500">
-          <% @patients.each do |patient| %>
-          <tr class="border-b hover:bg-gray-100">
-            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm"> <!-- Adjusted padding for smaller screens -->
-              <p class="whitespace-no-wrap"><%= patient.id %></p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
-              <p class="whitespace-no-wrap"><%= patient.name %></p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
-              <p class="whitespace-no-wrap"><%= patient.age %></p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
-              <p class="whitespace-no-wrap"><%= patient.contact_info %></p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
-              <p class="whitespace-no-wrap"><%= patient.address %></p>
-            </td>
-            <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
-              <p class="whitespace-no-wrap"><%= patient.created_at.to_date %></p>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
+              <% @patients.each do |patient| %>
+                <tr class="border-b hover:bg-gray-100">
+                  <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
+                    <p class="whitespace-no-wrap"><%= patient.id %></p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
+                    <p class="whitespace-no-wrap"><%= patient.name %></p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
+                    <p class="whitespace-no-wrap"><%= patient.age %></p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
+                    <p class="whitespace-no-wrap"><%= patient.contact_info %></p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
+                    <p class="whitespace-no-wrap"><%= patient.address %></p>
+                  </td>
+                  <td class="border-b border-gray-200 bg-white px-4 py-4 text-sm">
+                    <p class="whitespace-no-wrap"><%= patient.created_at.to_date %></p>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
       </table>
     </div>
     <div class="flex flex-col items-center border-t bg-white px-5 py-5 sm:flex-row sm:justify-between">
       <span class="text-xs text-gray-600 sm:text-sm"> Showing <%= @patients.count %> Entries </span>
     </div>
   </div>
-
 </div>
 
-<div class="flex flex-col w-full max-w-md h-[300px] gap-4 p-4"> <!-- Adjusted height for better display -->
-<div>
-<h2 class="text-xl font-bold text-center">Patient Registration Graph</h2>
+<div class="flex flex-col w-full max-w-md mx-auto gap-4 p-4">
+      <div>
+        <h2 class="text-xl font-bold text-center">Patient Registration Graph</h2>
+      </div>
+      <div class="flex justify-center">
+        <%= line_chart @patients_by_day, height: '300px', width: '100%' %> <!-- Responsive Chart -->
+      </div>
+</div> 
+
 </div>
-<div class="flex justify-center">
-<%= line_chart @patients_by_day, height: '300px', width: '100%' %>  <!-- Ensured chart is responsive -->
-</div>
-</div>
- </div>
-
-
-
-
-
-
